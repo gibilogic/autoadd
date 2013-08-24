@@ -1,43 +1,48 @@
 <?php defined('_JEXEC') or die( 'The way is shut!' );
 /*
- * @version       $Id: autoadd.php 2013-01-07 14:32:00Z zanardi $
+ * @version       autoadd.php 2013-08-24 15:25:00Z zanardi
  * @package       GiBi VMautoAdd
- * @author        GiBiLogic
- * @authorUrl     http://www.gibilogic.com
- * @authorEmail   info@gibilogic.com
+ * @author        GiBiLogic <info@gibilogic.com>
+ * @authorUrl     https://extensions.gibilogic.com
  * @copyright     Copyright (C) 2012-2013 GiBiLogic snc - All rights reserved.
  * @license       GNU/GPL v2 or later
  */
 
-if (!class_exists ('vmPSPlugin'))	require(JPATH_VM_PLUGINS . DS . 'vmpsplugin.php');
+if (!class_exists ('vmPSPlugin'))	require(JPATH_VM_PLUGINS.'/vmpsplugin.php');
 
 class plgVmShipmentAutoadd extends vmPSPlugin 
 {
-	function __construct (& $subject, $config) 
+  /**
+   * plgVmOnCheckoutAdvertise event handler
+   * Checks that the product to add is not already present in the cart
+   * 
+   * @param VmCart $cart
+   * @param $checkoutAdvertise
+   * @return bool true
+   */
+	public function plgVmOnCheckoutAdvertise($cart, &$checkoutAdvertise) 
   {
-    parent::__construct ($subject, $config);
-    $this->product_to_add = $this->params->get('product_id',0);    
-	}
-  
-	public function plgVmOnCheckoutAdvertise( $cart, &$checkoutAdvertise ) 
-  {
-    if( isset( $cart->products[ $this->product_to_add ] ) ) {
-      return true;
-    } else {
-      $this->_addProductToCart();
+    if (!isset($cart->products[$this->params->get('product_id',0)])) 
+    {
+      $this->addProductToCart();
     }
+    return true;
 	}
   
-  private function _addProductToCart()
+  /**
+   * Add product to cart
+   * 
+   * @return void
+   */
+  private function addProductToCart()
   {
-    $session =& JFactory::getSession();
-    if( $session->get( 'VMautoadded' ) ) return true; // check so that this product gets added only once per session
+    $session = JFactory::getSession();
+    if ($session->get('VMautoadded')) return true; // check so that this product gets added only once per session
     
     JRequest::setVar('quantity', array('1') );
     $cart = VirtueMartCart::getCart();
-    $cart->add( array( $this->product_to_add ) );
+    $cart->add(array($this->params->get('product_id',0)));
     
-    $session->set( 'VMautoadded', true ); // set the session so that this product gets added only once per session
-        
+    $session->set('VMautoadded', true); // set the session so that this product gets added only once per session
   }
 }

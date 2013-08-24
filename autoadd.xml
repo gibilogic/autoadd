@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension version="2.5" type="plugin" group="vmshipment" method="upgrade">
     <name>VMSHIPMENT_AUTOADD</name>
-    <creationDate>2012-11-26</creationDate>
-    <author>GiBiLogic snc</author>
-    <authorUrl>http://www.gibilogic.com</authorUrl>
-    <copyright>Copyright (C) 2012 GiBiLogic. All rights reserved.</copyright>
+    <creationDate>2013-08-24</creationDate>
+    <author>GiBiLogic</author>
+    <authorUrl>https://extensions.gibilogic.com</authorUrl>
+    <copyright>Copyright (C) 2012-2013 GiBiLogic. All rights reserved.</copyright>
     <license>GNU/GPL v2 or later</license>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <description>VMSHIPMENT_AUTOADD_DESC</description>
     <files>
         <filename plugin="autoadd">autoadd.php</filename>
     </files>
     <config>
-		<fields name="params">
-			<fieldset name="basic">
-        <field type="spacer" default="VMSHIPMENT_AUTOADD_USAGE"   />
-        <field type="text" name="product_id" default="" label="VMSHIPMENT_AUTOADD_PRODUCT_ID_LABEL" description="VMSHIPMENT_AUTOADD_PRODUCT_ID_DESC" />
-        </fieldset>
-      </fields>
+
+        <fields name="params">
+            <fieldset name="basic">
+                <field type="spacer" default="VMSHIPMENT_AUTOADD_USAGE"   />
+                <field type="text" name="product_id" default="" label="VMSHIPMENT_AUTOADD_PRODUCT_ID_LABEL" description="VMSHIPMENT_AUTOADD_PRODUCT_ID_DESC" />
+            </fieldset>
+        </fields>
     </config>
 </extension>
