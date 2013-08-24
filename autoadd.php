@@ -37,7 +37,7 @@ class plgVmShipmentAutoadd extends vmPSPlugin
   private function addProductToCart()
   {
     $session = JFactory::getSession();
-    if ($session->get('VMautoadded')) return true; // check so that this product gets added only once per session
+    if (!$this->params->get('force_add',0) && $session->get('VMautoadded')) return true; // check so that this product gets added only once per session if "force_add" is not set
     
     JRequest::setVar('quantity', array('1') );
     $cart = VirtueMartCart::getCart();
