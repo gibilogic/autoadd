@@ -12,11 +12,14 @@
         <filename plugin="autoadd">autoadd.php</filename>
     </files>
     <config>
-
         <fields name="params">
             <fieldset name="basic">
                 <field type="spacer" default="VMSHIPMENT_AUTOADD_USAGE"   />
-                <field type="text" name="product_id" default="" label="VMSHIPMENT_AUTOADD_PRODUCT_ID_LABEL" description="VMSHIPMENT_AUTOADD_PRODUCT_ID_DESC" />
+                <field type="text" name="product_id" label="VMSHIPMENT_AUTOADD_PRODUCT_ID_LABEL" description="VMSHIPMENT_AUTOADD_PRODUCT_ID_DESC" />
+                <field type="radio" name="force_add" label="VMSHIPMENT_AUTOADD_FORCE_ADD_LABEL" description="VMSHIPMENT_AUTOADD_FORCE_ADD_DESC">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
             </fieldset>
         </fields>
     </config>
